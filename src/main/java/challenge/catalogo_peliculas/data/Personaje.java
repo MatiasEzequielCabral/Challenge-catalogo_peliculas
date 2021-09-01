@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "personajes")
 public class Personaje{
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String imagen;
     private String nombre;
     private int edad;
@@ -26,6 +26,14 @@ public class Personaje{
         this.peso = peso;
         this.historia = historia;
         this.peliculas = peliculas;
+    }
+
+    public Personaje(String imagen, String nombre, int edad, int peso, String historia) {
+        this.imagen = imagen;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.peso = peso;
+        this.historia = historia;
     }
 
     public Personaje() {
