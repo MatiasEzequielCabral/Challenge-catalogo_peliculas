@@ -1,9 +1,7 @@
 package challenge.catalogo_peliculas.service;
 
-import challenge.catalogo_peliculas.builder.GeneroBuilder;
 import challenge.catalogo_peliculas.builder.PeliculaBuilder;
 import challenge.catalogo_peliculas.dao.PeliculaRepository;
-import challenge.catalogo_peliculas.data.Genero;
 import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.dto.PeliculaDto;
 import org.springframework.stereotype.Service;

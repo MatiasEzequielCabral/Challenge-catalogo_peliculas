@@ -1,17 +1,11 @@
 package challenge.catalogo_peliculas.Controller;
 
-import challenge.catalogo_peliculas.dao.PersonajeRepository;
-import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.data.Personaje;
-import challenge.catalogo_peliculas.dto.PeliculaDto;
 import challenge.catalogo_peliculas.dto.PersonajeDto;
 import challenge.catalogo_peliculas.service.PersonajeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 
 @RestController
 @RequestMapping("/characters")

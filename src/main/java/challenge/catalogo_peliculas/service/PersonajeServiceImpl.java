@@ -1,9 +1,7 @@
 package challenge.catalogo_peliculas.service;
 
-import challenge.catalogo_peliculas.builder.PeliculaBuilder;
 import challenge.catalogo_peliculas.builder.PersonajeBuilder;
 import challenge.catalogo_peliculas.dao.PersonajeRepository;
-import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.data.Personaje;
 import challenge.catalogo_peliculas.dto.PersonajeDto;
 import org.springframework.stereotype.Service;
