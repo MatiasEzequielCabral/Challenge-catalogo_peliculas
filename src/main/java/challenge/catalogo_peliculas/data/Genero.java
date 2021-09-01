@@ -17,6 +17,11 @@ public class Genero {
         this.peliculas = peliculas;
     }
 
+    public Genero(String nombre, String imagen) {
+        this.nombre = nombre;
+        this.imagen = imagen;
+    }
+
     public Genero() {
 
     }
