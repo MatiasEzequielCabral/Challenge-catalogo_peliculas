@@ -26,6 +26,13 @@ public class Pelicula {
         this.personajes = personajes;
     }
 
+    public Pelicula(String imagen, String titulo, int calificacion) {
+        this.imagen = imagen;
+        this.titulo = titulo;
+        this.calificacion = calificacion;
+        this.fechaCreacion = new Date();
+    }
+
     public Pelicula(){
 
     }
