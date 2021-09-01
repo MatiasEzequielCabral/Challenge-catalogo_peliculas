@@ -1,57 +1,47 @@
 package challenge.catalogo_peliculas.Controller;
 
-import challenge.catalogo_peliculas.dao.GeneroRepository;
 import challenge.catalogo_peliculas.data.Genero;
+import challenge.catalogo_peliculas.dto.GeneroDto;
 import challenge.catalogo_peliculas.service.GeneroService;
-import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@Service
-public class GeneroController implements GeneroService {
+@RequestMapping("/generos")
+@CrossOrigin("*")
+public class GeneroController{
+    private final GeneroService generoService;
 
-    private final GeneroRepository repositorio;
-
-    public GeneroController(GeneroRepository repositorio) {
-        this.repositorio = repositorio;
+    public GeneroController(GeneroService generoService) {
+        this.generoService = generoService;
     }
 
-    @GetMapping("/generos")
-    @Override
-    public List<Genero> mostrarTodasGenero() {
-        return repositorio.findAll();
+
+    @GetMapping
+    public ResponseEntity<?> mostrarGeneros(){
+        return new ResponseEntity<>(generoService.mostrarTodasGenero(), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/peliculas/genero/{id}")
-    @Override
-    public List<Genero> mostrarTodasPeliculasPorId(@PathVariable Long id){
-        return repositorio.getAllPeliculasById(id);
+    @GetMapping("/movies/genero/{id}")
+    public ResponseEntity<?> mostrarPeliculasPorId(@PathVariable Long id){
+        return new ResponseEntity<>(generoService.mostrarTodasPeliculasPorId(id), HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/generos")
-    @Override
-    public Genero nuevaGenero(@RequestBody Genero nuevaGenero) {
-        return repositorio.save(nuevaGenero);
+    /*@PutMapping("/{id}")
+    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroDto generoDto){
+        return new ResponseEntity<>(generoService.reemplazarGenero(generoDto, id), HttpStatus.OK);
+    }*/
+
+    @PostMapping
+    public ResponseEntity<?> guardarGenero(@RequestBody GeneroDto generoDto){
+        Genero genero = generoService.nuevaGenero(generoDto);
+        return new ResponseEntity<>(genero, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/generos/{id}")
-    @Override
-    public Genero reemplazarGenero(@RequestBody Genero nuevaGenero, @PathVariable Long id) {
-        return repositorio.findById(id)
-                .map(genero -> {
-                    genero.setNombre(nuevaGenero.getNombre());
-                    return repositorio.save(genero);
-                }).orElseGet(() ->{
-                    nuevaGenero.setId(id);
-                    return repositorio.save(nuevaGenero);
-                });
-    }
-
-    @DeleteMapping("/generos/{id}")
-    @Override
-    public void borrarGenero(@PathVariable Long id) {
-        repositorio.deleteById(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> borrarGenero(@PathVariable Long id){
+        generoService.borrarGenero(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

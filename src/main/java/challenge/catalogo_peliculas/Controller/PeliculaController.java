@@ -1,70 +1,60 @@
 package challenge.catalogo_peliculas.Controller;
 
-import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.data.Pelicula;
+import challenge.catalogo_peliculas.dto.PeliculaDto;
 import challenge.catalogo_peliculas.service.PeliculaService;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@Service
-public class PeliculaController  implements PeliculaService {
+@RequestMapping("/movies")
+@CrossOrigin("*")
+public class PeliculaController{
 
-    private final PeliculaRepository repositorio;
+    @Autowired
+    private final PeliculaService peliculaService;
 
-    public PeliculaController(PeliculaRepository repositorio) {
-        this.repositorio = repositorio;
+    public PeliculaController(PeliculaService peliculaService) {
+        this.peliculaService = peliculaService;
     }
 
-    @GetMapping("/peliculas")
-    @Override
-    public List<Pelicula> mostrarTodasPeliculas() {
-        return repositorio.findAll();
+    @GetMapping
+    public ResponseEntity<?> mostrarPeliculas(){
+        return new ResponseEntity<>(peliculaService.mostrarTodasPeliculas(), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/peliculas/titulo/{titulo}")
-    @Override
-    public Pelicula buscarPorTitulo(@PathVariable String titulo){
-        return repositorio.findByTitulo(titulo);
+    @GetMapping("titulo/{titulo}")
+    public ResponseEntity<?> mostrarPeliculasPorTitulo(@PathVariable String titulo){
+        return new ResponseEntity<>(peliculaService.buscarPorTitulo(titulo), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/peliculas/orden/ASC")
-    @Override
-    public List<Pelicula> buscarPorCreacionAscendente() {
-        return repositorio.findAllByOrderByFechaCreacionAsc();
+    @GetMapping("orden/ASC")
+    public ResponseEntity<?> mostrarPeliculasPorCreacionAscendente(){
+        return new ResponseEntity<>(peliculaService.buscarPorCreacionAscendente(), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/peliculas/orden/DESC")
-    @Override
-    public List<Pelicula> buscarPorCreacionDescendente() {
-        return repositorio.findAllByOrderByFechaCreacionDesc();
+    @GetMapping("orden/DESC")
+    public ResponseEntity<?> mostrarPeliculasPorCreacionDescendiente(){
+        return new ResponseEntity<>(peliculaService.buscarPorCreacionDescendente(), HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/peliculas")
-    @Override
-    public Pelicula nuevaPelicula(@RequestBody Pelicula nuevaPelicula) {
-        return repositorio.save(nuevaPelicula);
+    /*@PutMapping("/{id}")
+    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroDto generoDto){
+        return new ResponseEntity<>(generoService.reemplazarGenero(generoDto, id), HttpStatus.OK);
+    }*/
+
+    @PostMapping
+    public ResponseEntity<?> guardarPelicula(@RequestBody PeliculaDto peliculaDto){
+        Pelicula pelicula = peliculaService.nuevaPelicula(peliculaDto);
+        return new ResponseEntity<>(pelicula, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/peliculas/{id}")
-    @Override
-    public Pelicula reemplazarPelicula(@RequestBody Pelicula nuevaPelicula, @PathVariable Long id) {
-        return repositorio.findById(id)
-                .map(pelicula -> {
-                    pelicula.setTitulo(nuevaPelicula.getTitulo());
-                    return repositorio.save(pelicula);
-                })
-                .orElseGet(() -> {
-                    nuevaPelicula.setId(id);
-                    return repositorio.save(nuevaPelicula);
-                });
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> borrarPeliculaPorId(@PathVariable Long id){
+        peliculaService.borrarPelicula(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/peliculas/{id}")
-    @Override
-    public void borrarPelicula(@PathVariable Long id) {
-        repositorio.deleteById(id);
-    }
 }

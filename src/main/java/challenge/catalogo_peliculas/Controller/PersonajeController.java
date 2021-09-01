@@ -1,85 +1,68 @@
 package challenge.catalogo_peliculas.Controller;
 
 import challenge.catalogo_peliculas.dao.PersonajeRepository;
+import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.data.Personaje;
+import challenge.catalogo_peliculas.dto.PeliculaDto;
+import challenge.catalogo_peliculas.dto.PersonajeDto;
 import challenge.catalogo_peliculas.service.PersonajeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
-@Service
-public class PersonajeController implements PersonajeService {
+@RequestMapping("/characters")
+@CrossOrigin("*")
+public class PersonajeController {
 
-    private final PersonajeRepository repository;
+    private final PersonajeService personajeService;
 
-    PersonajeController(PersonajeRepository repository){
-        this.repository = repository;
+    public PersonajeController(PersonajeService personajeService) {
+        this.personajeService = personajeService;
     }
 
     @GetMapping("/personajes")
-    @Override
-    public List<Personaje> showAll() {
-        return repository.findAll();
+    public ResponseEntity<?> mostrarPersonajes(){
+        return new ResponseEntity<>(personajeService.showAll(), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/characters")
-    @Override
-    public List<String> showNombresAndImagen(){
-        return repository.getAllNombresAndImagen();
+    @GetMapping
+    public ResponseEntity<?> mostrarPorNombresEImagenes(){
+        return new ResponseEntity<>(personajeService.showNombresAndImagen(), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/characters/peliculas/{id}")
-    @Override
-    public List<Personaje> mostrarPeliculasPorId(@PathVariable Long id){
-        return repository.getAllPeliculasById(id);
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<?> mostrarPorNombre(@PathVariable String nombre){
+        return new ResponseEntity<>(personajeService.buscarPorNombre(nombre), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/characters/nombre/{nombre}")
-    @Override
-    public List<Personaje> buscarPorNombre(@PathVariable String nombre){
-        return repository.findByNombre(nombre);
+    @GetMapping("/edad/{edad}")
+    public ResponseEntity<?> mostrarPorEdad(@PathVariable int edad){
+        return new ResponseEntity<>(personajeService.buscarPorEdad(edad), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/characters/edad/{edad}")
-    @Override
-    public List<Personaje> buscarPorEdad(@PathVariable int edad){
-        return repository.findByEdad(edad);
+    @GetMapping("/peso/{peso}")
+    public ResponseEntity<?> mostrarPorPeso(@PathVariable int peso){
+        return new ResponseEntity<>(personajeService.buscarPorPeso(peso), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/characters/peso/{peso}")
-    @Override
-    public List<Personaje> buscarPorPeso(@PathVariable int peso){
-        return repository.findByPeso(peso);
+    /*@PutMapping("/{id}")
+    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroDto generoDto){
+        return new ResponseEntity<>(generoService.reemplazarGenero(generoDto, id), HttpStatus.OK);
+    }*/
+
+    @PostMapping
+    public ResponseEntity<?> guardarPersonaje(@RequestBody PersonajeDto personaje){
+        Personaje nuevoPersonaje = personajeService.newPersonaje(personaje);
+        return new ResponseEntity<>(nuevoPersonaje, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/personajes")
-    @Override
-    public Personaje newPersonaje(@RequestBody Personaje newPersonaje) {
-        return repository.save(newPersonaje);
-    }
-
-    @PutMapping("/personajes/{id}")
-    @Override
-    public Personaje replacePersonaje(@RequestBody Personaje newPersonaje, @PathVariable Long id) {
-
-        return repository.findById(id)
-                .map(personaje -> {
-                    personaje.setNombre(newPersonaje.getNombre());
-                    return repository.save(personaje);
-                })
-                .orElseGet(() -> {
-                    newPersonaje.setId(id);
-                    return repository.save(newPersonaje);
-                });
-    }
-
-    @DeleteMapping("/personajes/{id}")
-    @Override
-    public void deletePersonaje(@PathVariable Long id) {
-        repository.deleteById(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> borrarPersonaje(@PathVariable Long id){
+        personajeService.deletePersonaje(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
