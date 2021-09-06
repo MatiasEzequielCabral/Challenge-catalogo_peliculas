@@ -30,6 +30,9 @@ public class Pelicula {
         this.imagen = imagen;
         this.titulo = titulo;
         this.calificacion = calificacion;
+        if(calificacion < 1 || calificacion > 5){
+            throw new IllegalArgumentException("La nota tiene que ser de 1 a 5");
+        }
         this.fechaCreacion = new Date();
     }
 
