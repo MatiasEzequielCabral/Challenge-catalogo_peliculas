@@ -34,6 +34,7 @@ public class Personaje{
         this.edad = edad;
         this.peso = peso;
         this.historia = historia;
+        this.peliculas = new ArrayList<>();
     }
 
     public Personaje() {
@@ -93,5 +94,9 @@ public class Personaje{
 
     public void setPeliculas(List<Pelicula> peliculas) {
         this.peliculas = peliculas;
+    }
+
+    public void setPeli(Pelicula pelicula){
+        this.peliculas.add(pelicula);
     }
 }

@@ -34,6 +34,7 @@ public class Pelicula {
             throw new IllegalArgumentException("La nota tiene que ser de 1 a 5");
         }
         this.fechaCreacion = new Date();
+        this.personajes = new ArrayList<>();
     }
 
     public Pelicula(){
@@ -86,5 +87,9 @@ public class Pelicula {
 
     public void setPersonajes(List<Personaje> personajes) {
         this.personajes = personajes;
+    }
+
+    public void setPersonaje(Personaje personaje){
+        this.personajes.add(personaje);
     }
 }

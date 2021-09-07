@@ -1,6 +1,7 @@
 package challenge.catalogo_peliculas.data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,7 @@ public class Genero {
     public Genero(String nombre, String imagen) {
         this.nombre = nombre;
         this.imagen = imagen;
+        this.peliculas = new ArrayList<>();
     }
 
     public Genero() {
@@ -56,5 +58,9 @@ public class Genero {
 
     public void setPeliculas(List<Pelicula> peliculas) {
         this.peliculas = peliculas;
+    }
+
+    public void setPeli(Pelicula pelicula){
+        this.peliculas.add(pelicula);
     }
 }
