@@ -7,8 +7,17 @@ public class PersonajeDto {
     private int edad;
     private int peso;
     private String historia;
+    private Long idPelicula;
 
     public PersonajeDto() {
+    }
+
+    public Long getIdPelicula() {
+        return idPelicula;
+    }
+
+    public void setIdPelicula(Long idPelicula) {
+        this.idPelicula = idPelicula;
     }
 
     public String getImagen() {

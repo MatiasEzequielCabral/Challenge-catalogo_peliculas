@@ -4,6 +4,7 @@ public class PeliculaDto {
     private String imagen;
     private String titulo;
     private int calificacion;
+    private Long idPersonaje;
 
     public PeliculaDto() {
     }
@@ -18,6 +19,14 @@ public class PeliculaDto {
 
     public String getTitulo() {
         return titulo;
+    }
+
+    public Long getIdPersonaje() {
+        return idPersonaje;
+    }
+
+    public void setIdPersonaje(Long idPersonaje) {
+        this.idPersonaje = idPersonaje;
     }
 
     public void setTitulo(String titulo) {
