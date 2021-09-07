@@ -2,6 +2,7 @@ package challenge.catalogo_peliculas.service;
 
 import challenge.catalogo_peliculas.builder.PeliculaBuilder;
 import challenge.catalogo_peliculas.dao.PeliculaRepository;
+import challenge.catalogo_peliculas.dao.PersonajeRepository;
 import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.dto.PeliculaDto;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,12 @@ import java.util.List;
 @Service
 public class PeliculaServiceImpl implements PeliculaService{
 
-    PeliculaRepository peliculaRepository;
+    private PeliculaRepository peliculaRepository;
+    private PersonajeRepository personajeRepository;
 
-    public PeliculaServiceImpl(PeliculaRepository peliculaRepository) {
+    public PeliculaServiceImpl(PeliculaRepository peliculaRepository, PersonajeRepository personajeRepository) {
         this.peliculaRepository = peliculaRepository;
+        this.personajeRepository = personajeRepository;
     }
 
     @Override
@@ -46,16 +49,10 @@ public class PeliculaServiceImpl implements PeliculaService{
     }
 
     @Override
-    public Pelicula reemplazarPelicula(@RequestBody Pelicula nuevaPelicula, @PathVariable Long id) {
-        return peliculaRepository.findById(id)
-                .map(pelicula -> {
-                    pelicula.setTitulo(nuevaPelicula.getTitulo());
-                    return peliculaRepository.save(pelicula);
-                })
-                .orElseGet(() -> {
-                    nuevaPelicula.setId(id);
-                    return peliculaRepository.save(nuevaPelicula);
-                });
+    public Pelicula reemplazarPelicula(Long id, PeliculaDto pelicula) {
+        Pelicula nuevaPelicula = peliculaRepository.findById(id).get();
+        nuevaPelicula.setPersonaje(personajeRepository.findById(pelicula.getIdPersonaje()).get());
+        return peliculaRepository.save(nuevaPelicula);
     }
 
     @Override

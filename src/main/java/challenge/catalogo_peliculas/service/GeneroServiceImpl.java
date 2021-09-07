@@ -2,7 +2,9 @@ package challenge.catalogo_peliculas.service;
 
 import challenge.catalogo_peliculas.builder.GeneroBuilder;
 import challenge.catalogo_peliculas.dao.GeneroRepository;
+import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.data.Genero;
+import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.dto.GeneroDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +16,11 @@ public class GeneroServiceImpl implements GeneroService{
 
     private GeneroRepository generoRepository;
 
+    private PeliculaRepository peliculaRepository;
 
-    public GeneroServiceImpl(GeneroRepository generoRepository) {
+    public GeneroServiceImpl(GeneroRepository generoRepository, PeliculaRepository peliculaRepository) {
         this.generoRepository = generoRepository;
+        this.peliculaRepository = peliculaRepository;
     }
 
     @Override
@@ -37,7 +41,9 @@ public class GeneroServiceImpl implements GeneroService{
 
     @Override
     public Genero reemplazarGenero(Long id, GeneroDto generoDto) {
-        return null;
+        Genero nuevoGenero = generoRepository.findById(id).get();
+        nuevoGenero.setPeli(peliculaRepository.findById(generoDto.getIdPelicula()).get());
+        return generoRepository.save(nuevoGenero);
     }
 
     @Override

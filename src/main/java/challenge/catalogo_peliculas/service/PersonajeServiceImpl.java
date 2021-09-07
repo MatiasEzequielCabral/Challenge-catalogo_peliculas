@@ -1,7 +1,9 @@
 package challenge.catalogo_peliculas.service;
 
 import challenge.catalogo_peliculas.builder.PersonajeBuilder;
+import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.dao.PersonajeRepository;
+import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.data.Personaje;
 import challenge.catalogo_peliculas.dto.PersonajeDto;
 import org.springframework.stereotype.Service;
@@ -12,11 +14,12 @@ import java.util.List;
 public class PersonajeServiceImpl implements PersonajeService{
 
     private PersonajeRepository personajeRepository;
+    private PeliculaRepository peliculaRepository;
 
-    public PersonajeServiceImpl(PersonajeRepository personajeRepository) {
+    public PersonajeServiceImpl(PersonajeRepository personajeRepository, PeliculaRepository peliculaRepository) {
         this.personajeRepository = personajeRepository;
+        this.peliculaRepository = peliculaRepository;
     }
-
 
     @Override
     public List<Personaje> showAll() {
@@ -55,8 +58,10 @@ public class PersonajeServiceImpl implements PersonajeService{
     }
 
     @Override
-    public Personaje replacePersonaje(Personaje newPersonaje, Long id) {
-        return null;
+    public Personaje replacePersonaje(Long id, PersonajeDto newPersonaje) {
+        Personaje nuevoPersonaje = personajeRepository.findById(id).get();
+        nuevoPersonaje.setPeli(peliculaRepository.findById(newPersonaje.getIdPelicula()).get());
+        return personajeRepository.save(nuevoPersonaje);
     }
 
     @Override
