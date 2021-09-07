@@ -14,6 +14,6 @@ public interface PersonajeService {
     List<Personaje> buscarPorEdad(int edad);
     List<Personaje> buscarPorPeso(int peso);
     Personaje newPersonaje(PersonajeDto newPersonaje);
-    Personaje replacePersonaje(Personaje newPersonaje, Long id);
+    Personaje replacePersonaje(Long id, PersonajeDto newPersonaje);
     void deletePersonaje(Long id);
 }

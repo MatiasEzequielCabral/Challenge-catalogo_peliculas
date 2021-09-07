@@ -12,6 +12,6 @@ public interface PeliculaService {
     List<Pelicula> buscarPorCreacionAscendente();
     List<Pelicula> buscarPorCreacionDescendente();
     Pelicula nuevaPelicula(PeliculaDto nuevaPelicula);
-    Pelicula reemplazarPelicula(Pelicula nuevaPelicula, Long id);
+    Pelicula reemplazarPelicula(Long id, PeliculaDto nuevaPelicula);
     void borrarPelicula(Long id);
 }
