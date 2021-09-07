@@ -43,10 +43,10 @@ public class PersonajeController {
         return new ResponseEntity<>(personajeService.buscarPorPeso(peso), HttpStatus.ACCEPTED);
     }
 
-    /*@PutMapping("/{id}")
-    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroDto generoDto){
-        return new ResponseEntity<>(generoService.reemplazarGenero(generoDto, id), HttpStatus.OK);
-    }*/
+    @PutMapping("/{id}")
+    public ResponseEntity<?> actualizarPersonaje(@PathVariable Long id, @RequestBody PersonajeDto personajeDto){
+        return new ResponseEntity<>(personajeService.replacePersonaje(id, personajeDto), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<?> guardarPersonaje(@RequestBody PersonajeDto personaje){

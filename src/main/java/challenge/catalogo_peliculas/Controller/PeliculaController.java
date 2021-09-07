@@ -40,10 +40,11 @@ public class PeliculaController{
         return new ResponseEntity<>(peliculaService.buscarPorCreacionDescendente(), HttpStatus.ACCEPTED);
     }
 
-    /*@PutMapping("/{id}")
-    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroDto generoDto){
-        return new ResponseEntity<>(generoService.reemplazarGenero(generoDto, id), HttpStatus.OK);
-    }*/
+    @PutMapping("/{id}")
+    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody PeliculaDto peliculaDto){
+        Pelicula pelicula = peliculaService.reemplazarPelicula(id, peliculaDto);
+        return new ResponseEntity<>(pelicula, HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<?> guardarPelicula(@RequestBody PeliculaDto peliculaDto){

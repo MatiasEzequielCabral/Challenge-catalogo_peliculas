@@ -28,10 +28,10 @@ public class GeneroController{
         return new ResponseEntity<>(generoService.mostrarTodasPeliculasPorId(id), HttpStatus.ACCEPTED);
     }
 
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroDto generoDto){
-        return new ResponseEntity<>(generoService.reemplazarGenero(generoDto, id), HttpStatus.OK);
-    }*/
+        return new ResponseEntity<>(generoService.reemplazarGenero(id, generoDto), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<?> guardarGenero(@RequestBody GeneroDto generoDto){
