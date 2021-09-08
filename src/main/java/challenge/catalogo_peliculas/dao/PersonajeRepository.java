@@ -13,7 +13,6 @@ public interface PersonajeRepository extends JpaRepository<Personaje, Long> {
     @Query("select personaje.nombre, personaje.imagen from Personaje personaje")
     List<String> getAllNombresAndImagen();
 
-    //@Query("select personaje.peliculas from Personaje personaje")
     List<Personaje> getAllPeliculasById(Long id);
 
     List<Personaje> findByNombre(String nombre);
