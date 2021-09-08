@@ -30,6 +30,11 @@ public class PeliculaController{
         return new ResponseEntity<>(peliculaService.buscarPorTitulo(titulo), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("genero/{id}")
+    public ResponseEntity<?> mostrarPorGenero(@PathVariable Long id){
+        return new ResponseEntity<>(peliculaService.buscarTodasPelisPorGeneroId(id), HttpStatus.ACCEPTED);
+    }
+
     @GetMapping("orden/ASC")
     public ResponseEntity<?> mostrarPeliculasPorCreacionAscendente(){
         return new ResponseEntity<>(peliculaService.buscarPorCreacionAscendente(), HttpStatus.ACCEPTED);
