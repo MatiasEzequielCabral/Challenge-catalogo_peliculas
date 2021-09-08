@@ -1,8 +1,10 @@
 package challenge.catalogo_peliculas.service;
 
 import challenge.catalogo_peliculas.builder.PeliculaBuilder;
+import challenge.catalogo_peliculas.dao.GeneroRepository;
 import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.dao.PersonajeRepository;
+import challenge.catalogo_peliculas.data.Genero;
 import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.dto.PeliculaDto;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,12 @@ public class PeliculaServiceImpl implements PeliculaService{
 
     private PeliculaRepository peliculaRepository;
     private PersonajeRepository personajeRepository;
+    private GeneroRepository generoRepository;
 
-    public PeliculaServiceImpl(PeliculaRepository peliculaRepository, PersonajeRepository personajeRepository) {
+    public PeliculaServiceImpl(PeliculaRepository peliculaRepository, PersonajeRepository personajeRepository, GeneroRepository generoRepository) {
         this.peliculaRepository = peliculaRepository;
         this.personajeRepository = personajeRepository;
+        this.generoRepository = generoRepository;
     }
 
     @Override
@@ -40,6 +44,12 @@ public class PeliculaServiceImpl implements PeliculaService{
     @Override
     public List<Pelicula> buscarPorCreacionDescendente() {
         return peliculaRepository.findAllByOrderByFechaCreacionDesc();
+    }
+
+    @Override
+    public List<Pelicula> buscarTodasPelisPorGeneroId(Long id) {
+        Genero genero = generoRepository.findById(id).get();
+        return genero.getPeliculas();
     }
 
     @Override
