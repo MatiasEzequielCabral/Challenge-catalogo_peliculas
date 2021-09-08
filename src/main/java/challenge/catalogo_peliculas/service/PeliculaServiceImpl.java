@@ -51,6 +51,7 @@ public class PeliculaServiceImpl implements PeliculaService{
     @Override
     public Pelicula reemplazarPelicula(Long id, PeliculaDto pelicula) {
         Pelicula nuevaPelicula = peliculaRepository.findById(id).get();
+        nuevaPelicula = new PeliculaBuilder().withPeliculaDto(pelicula).edit(nuevaPelicula);
         nuevaPelicula.setPersonaje(personajeRepository.findById(pelicula.getIdPersonaje()).get());
         return peliculaRepository.save(nuevaPelicula);
     }

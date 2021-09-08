@@ -1,5 +1,6 @@
 package challenge.catalogo_peliculas.service;
 
+import challenge.catalogo_peliculas.builder.PeliculaBuilder;
 import challenge.catalogo_peliculas.builder.PersonajeBuilder;
 import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.dao.PersonajeRepository;
@@ -60,6 +61,7 @@ public class PersonajeServiceImpl implements PersonajeService{
     @Override
     public Personaje replacePersonaje(Long id, PersonajeDto newPersonaje) {
         Personaje nuevoPersonaje = personajeRepository.findById(id).get();
+        nuevoPersonaje = new PersonajeBuilder().withPersonajeDto(newPersonaje).edit(nuevoPersonaje);
         nuevoPersonaje.setPeli(peliculaRepository.findById(newPersonaje.getIdPelicula()).get());
         return personajeRepository.save(nuevoPersonaje);
     }

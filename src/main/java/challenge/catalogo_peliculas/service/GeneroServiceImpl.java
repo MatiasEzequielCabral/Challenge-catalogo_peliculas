@@ -1,6 +1,7 @@
 package challenge.catalogo_peliculas.service;
 
 import challenge.catalogo_peliculas.builder.GeneroBuilder;
+import challenge.catalogo_peliculas.builder.PeliculaBuilder;
 import challenge.catalogo_peliculas.dao.GeneroRepository;
 import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.data.Genero;
@@ -42,6 +43,7 @@ public class GeneroServiceImpl implements GeneroService{
     @Override
     public Genero reemplazarGenero(Long id, GeneroDto generoDto) {
         Genero nuevoGenero = generoRepository.findById(id).get();
+        nuevoGenero = new GeneroBuilder().withGeneroDto(generoDto).edit(nuevoGenero);
         nuevoGenero.setPeli(peliculaRepository.findById(generoDto.getIdPelicula()).get());
         return generoRepository.save(nuevoGenero);
     }
