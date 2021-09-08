@@ -18,5 +18,11 @@ public class GeneroBuilder {
         return new Genero(this.nombre, this.imagen);
     }
 
+    public Genero edit(Genero genero){
+        genero.setNombre(this.nombre);
+        genero.setImagen(this.imagen);
+        return genero;
+    }
+
 
 }

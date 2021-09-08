@@ -19,4 +19,11 @@ public class PeliculaBuilder {
     public Pelicula build(){
         return new Pelicula(this.imagen, this.titulo, this.calificacion);
     }
+
+    public Pelicula edit(Pelicula pelicula){
+        pelicula.setImagen(this.imagen);
+        pelicula.setTitulo(this.titulo);
+        pelicula.setCalificacion(this.calificacion);
+        return pelicula;
+    }
 }
