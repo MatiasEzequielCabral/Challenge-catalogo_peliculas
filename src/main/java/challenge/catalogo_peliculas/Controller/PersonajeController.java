@@ -28,6 +28,11 @@ public class PersonajeController {
         return new ResponseEntity<>(personajeService.showNombresAndImagen(), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("movies/{id}")
+    public ResponseEntity<?> mostrarPelisPorId(@PathVariable Long id){
+        return new ResponseEntity<>(personajeService.mostrarPeliculasPorId(id), HttpStatus.ACCEPTED);
+    }
+
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<?> mostrarPorNombre(@PathVariable String nombre){
         return new ResponseEntity<>(personajeService.buscarPorNombre(nombre), HttpStatus.ACCEPTED);
