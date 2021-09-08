@@ -1,11 +1,9 @@
 package challenge.catalogo_peliculas.service;
 
 import challenge.catalogo_peliculas.builder.GeneroBuilder;
-import challenge.catalogo_peliculas.builder.PeliculaBuilder;
 import challenge.catalogo_peliculas.dao.GeneroRepository;
 import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.data.Genero;
-import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.dto.GeneroDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +25,6 @@ public class GeneroServiceImpl implements GeneroService{
     @Override
     public List<Genero> mostrarTodasGenero() {
         return generoRepository.findAll();
-    }
-
-    @Override
-    public List<Genero> mostrarTodasPeliculasPorId(@PathVariable Long id){
-        return generoRepository.getAllPeliculasById(id);
     }
 
     @Override
