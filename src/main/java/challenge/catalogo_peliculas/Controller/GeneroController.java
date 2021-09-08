@@ -23,11 +23,6 @@ public class GeneroController{
         return new ResponseEntity<>(generoService.mostrarTodasGenero(), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/movies/genero/{id}")
-    public ResponseEntity<?> mostrarPeliculasPorId(@PathVariable Long id){
-        return new ResponseEntity<>(generoService.mostrarTodasPeliculasPorId(id), HttpStatus.ACCEPTED);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroDto generoDto){
         return new ResponseEntity<>(generoService.reemplazarGenero(id, generoDto), HttpStatus.OK);
