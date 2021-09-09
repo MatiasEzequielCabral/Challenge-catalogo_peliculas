@@ -6,7 +6,9 @@ import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.dao.PersonajeRepository;
 import challenge.catalogo_peliculas.data.Genero;
 import challenge.catalogo_peliculas.data.Pelicula;
-import challenge.catalogo_peliculas.dto.PeliculaDto;
+import challenge.catalogo_peliculas.data.Personaje;
+import challenge.catalogo_peliculas.dto.PeliculaCrearDto;
+import challenge.catalogo_peliculas.dto.PeliculaEditarDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,16 +55,20 @@ public class PeliculaServiceImpl implements PeliculaService{
     }
 
     @Override
-    public Pelicula nuevaPelicula(@RequestBody PeliculaDto pelicula) {
+    public Pelicula nuevaPelicula(@RequestBody PeliculaCrearDto pelicula) {
         Pelicula nuevaPelicula = new PeliculaBuilder().withPeliculaDto(pelicula).build();
         return peliculaRepository.save(nuevaPelicula);
     }
 
     @Override
-    public Pelicula reemplazarPelicula(Long id, PeliculaDto pelicula) {
+    public Pelicula reemplazarPelicula(Long id, PeliculaEditarDto pelicula) {
         Pelicula nuevaPelicula = peliculaRepository.findById(id).get();
         nuevaPelicula = new PeliculaBuilder().withPeliculaDto(pelicula).edit(nuevaPelicula);
-        nuevaPelicula.setPersonaje(personajeRepository.findById(pelicula.getIdPersonaje()).get());
+        Personaje personaje = personajeRepository.findById(pelicula.getIdPersonaje()).get();
+        nuevaPelicula.setPersonaje(personaje);
+        //al asignarle un personaje a la pelicula enlaza tambien el personaje a la pelicula que le corresponde
+        personaje.setPeli(nuevaPelicula);
+        personajeRepository.save(personaje);
         return peliculaRepository.save(nuevaPelicula);
     }
 
