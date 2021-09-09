@@ -1,7 +1,8 @@
 package challenge.catalogo_peliculas.Controller;
 
 import challenge.catalogo_peliculas.data.Genero;
-import challenge.catalogo_peliculas.dto.GeneroDto;
+import challenge.catalogo_peliculas.dto.GeneroCrearDto;
+import challenge.catalogo_peliculas.dto.GeneroEditarDto;
 import challenge.catalogo_peliculas.service.GeneroService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +25,12 @@ public class GeneroController{
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroDto generoDto){
+    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroEditarDto generoDto){
         return new ResponseEntity<>(generoService.reemplazarGenero(id, generoDto), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> guardarGenero(@RequestBody GeneroDto generoDto){
+    public ResponseEntity<?> guardarGenero(@RequestBody GeneroCrearDto generoDto){
         Genero genero = generoService.nuevaGenero(generoDto);
         return new ResponseEntity<>(genero, HttpStatus.ACCEPTED);
     }
