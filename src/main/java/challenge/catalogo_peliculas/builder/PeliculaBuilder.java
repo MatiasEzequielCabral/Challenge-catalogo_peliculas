@@ -1,7 +1,8 @@
 package challenge.catalogo_peliculas.builder;
 
 import challenge.catalogo_peliculas.data.Pelicula;
-import challenge.catalogo_peliculas.dto.PeliculaDto;
+import challenge.catalogo_peliculas.dto.PeliculaCrearDto;
+import challenge.catalogo_peliculas.dto.PeliculaEditarDto;
 
 public class PeliculaBuilder {
 
@@ -9,7 +10,14 @@ public class PeliculaBuilder {
     private String titulo;
     private int calificacion;
 
-    public PeliculaBuilder withPeliculaDto(PeliculaDto peliculaDto){
+    public PeliculaBuilder withPeliculaDto(PeliculaCrearDto peliculaDto){
+        this.imagen = peliculaDto.getImagen();
+        this.titulo = peliculaDto.getTitulo();
+        this.calificacion = peliculaDto.getCalificacion();
+        return this;
+    }
+
+    public PeliculaBuilder withPeliculaDto(PeliculaEditarDto peliculaDto){
         this.imagen = peliculaDto.getImagen();
         this.titulo = peliculaDto.getTitulo();
         this.calificacion = peliculaDto.getCalificacion();
