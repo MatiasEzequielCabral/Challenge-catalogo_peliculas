@@ -4,7 +4,8 @@ import challenge.catalogo_peliculas.builder.GeneroBuilder;
 import challenge.catalogo_peliculas.dao.GeneroRepository;
 import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.data.Genero;
-import challenge.catalogo_peliculas.dto.GeneroDto;
+import challenge.catalogo_peliculas.dto.GeneroCrearDto;
+import challenge.catalogo_peliculas.dto.GeneroEditarDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,13 +29,13 @@ public class GeneroServiceImpl implements GeneroService{
     }
 
     @Override
-    public Genero nuevaGenero(GeneroDto generoDto) {
+    public Genero nuevaGenero(GeneroCrearDto generoDto) {
         Genero nuevoGenero = new GeneroBuilder().withGeneroDto(generoDto).build();
         return generoRepository.save(nuevoGenero);
     }
 
     @Override
-    public Genero reemplazarGenero(Long id, GeneroDto generoDto) {
+    public Genero reemplazarGenero(Long id, GeneroEditarDto generoDto) {
         Genero nuevoGenero = generoRepository.findById(id).get();
         nuevoGenero = new GeneroBuilder().withGeneroDto(generoDto).edit(nuevoGenero);
         nuevoGenero.setPeli(peliculaRepository.findById(generoDto.getIdPelicula()).get());
