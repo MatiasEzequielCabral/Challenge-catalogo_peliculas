@@ -1,11 +1,11 @@
 package challenge.catalogo_peliculas.dto;
 
-public class GeneroDto {
+public class GeneroEditarDto {
     private String nombre;
     private String imagen;
     private Long idPelicula;
 
-    public GeneroDto() {
+    public GeneroEditarDto() {
     }
 
     public Long getIdPelicula() {

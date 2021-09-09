@@ -1,6 +1,6 @@
 package challenge.catalogo_peliculas.dto;
 
-public class PersonajeDto {
+public class PersonajeEditarDto {
 
     private String imagen;
     private String nombre;
@@ -9,7 +9,7 @@ public class PersonajeDto {
     private String historia;
     private Long idPelicula;
 
-    public PersonajeDto() {
+    public PersonajeEditarDto() {
     }
 
     public Long getIdPelicula() {

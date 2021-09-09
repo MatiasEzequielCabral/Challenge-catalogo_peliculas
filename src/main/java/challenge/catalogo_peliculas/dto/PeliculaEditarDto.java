@@ -1,12 +1,12 @@
 package challenge.catalogo_peliculas.dto;
 
-public class PeliculaDto {
+public class PeliculaEditarDto {
     private String imagen;
     private String titulo;
     private int calificacion;
     private Long idPersonaje;
 
-    public PeliculaDto() {
+    public PeliculaEditarDto() {
     }
 
     public String getImagen() {
