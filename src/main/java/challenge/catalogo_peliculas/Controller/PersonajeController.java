@@ -1,7 +1,8 @@
 package challenge.catalogo_peliculas.Controller;
 
 import challenge.catalogo_peliculas.data.Personaje;
-import challenge.catalogo_peliculas.dto.PersonajeDto;
+import challenge.catalogo_peliculas.dto.PersonajeCrearDto;
+import challenge.catalogo_peliculas.dto.PersonajeEditarDto;
 import challenge.catalogo_peliculas.service.PersonajeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,12 +50,12 @@ public class PersonajeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarPersonaje(@PathVariable Long id, @RequestBody PersonajeDto personajeDto){
+    public ResponseEntity<?> actualizarPersonaje(@PathVariable Long id, @RequestBody PersonajeEditarDto personajeDto){
         return new ResponseEntity<>(personajeService.replacePersonaje(id, personajeDto), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> guardarPersonaje(@RequestBody PersonajeDto personaje){
+    public ResponseEntity<?> guardarPersonaje(@RequestBody PersonajeCrearDto personaje){
         Personaje nuevoPersonaje = personajeService.newPersonaje(personaje);
         return new ResponseEntity<>(nuevoPersonaje, HttpStatus.ACCEPTED);
     }
