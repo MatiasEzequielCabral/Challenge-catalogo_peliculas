@@ -1,8 +1,8 @@
 package challenge.catalogo_peliculas.builder;
 
-import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.data.Personaje;
-import challenge.catalogo_peliculas.dto.PersonajeDto;
+import challenge.catalogo_peliculas.dto.PersonajeCrearDto;
+import challenge.catalogo_peliculas.dto.PersonajeEditarDto;
 
 public class PersonajeBuilder {
 
@@ -12,7 +12,15 @@ public class PersonajeBuilder {
     private int peso;
     private String historia;
 
-    public PersonajeBuilder withPersonajeDto(PersonajeDto personajeDto){
+    public PersonajeBuilder withPersonajeDto(PersonajeCrearDto personajeDto){
+        this.imagen = personajeDto.getImagen();
+        this.nombre = personajeDto.getNombre();
+        this.edad = personajeDto.getEdad();
+        this.peso = personajeDto.getPeso();
+        this.historia = personajeDto.getHistoria();
+        return this;
+    }
+    public PersonajeBuilder withPersonajeDto(PersonajeEditarDto personajeDto){
         this.imagen = personajeDto.getImagen();
         this.nombre = personajeDto.getNombre();
         this.edad = personajeDto.getEdad();
