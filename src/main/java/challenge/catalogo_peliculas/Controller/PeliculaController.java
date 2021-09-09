@@ -1,7 +1,8 @@
 package challenge.catalogo_peliculas.Controller;
 
 import challenge.catalogo_peliculas.data.Pelicula;
-import challenge.catalogo_peliculas.dto.PeliculaDto;
+import challenge.catalogo_peliculas.dto.PeliculaCrearDto;
+import challenge.catalogo_peliculas.dto.PeliculaEditarDto;
 import challenge.catalogo_peliculas.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,13 +47,13 @@ public class PeliculaController{
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody PeliculaDto peliculaDto){
+    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody PeliculaEditarDto peliculaDto){
         Pelicula pelicula = peliculaService.reemplazarPelicula(id, peliculaDto);
         return new ResponseEntity<>(pelicula, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> guardarPelicula(@RequestBody PeliculaDto peliculaDto){
+    public ResponseEntity<?> guardarPelicula(@RequestBody PeliculaCrearDto peliculaDto){
         Pelicula pelicula = peliculaService.nuevaPelicula(peliculaDto);
         return new ResponseEntity<>(pelicula, HttpStatus.ACCEPTED);
     }
