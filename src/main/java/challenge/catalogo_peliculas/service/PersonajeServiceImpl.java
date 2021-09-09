@@ -1,12 +1,12 @@
 package challenge.catalogo_peliculas.service;
 
-import challenge.catalogo_peliculas.builder.PeliculaBuilder;
 import challenge.catalogo_peliculas.builder.PersonajeBuilder;
 import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.dao.PersonajeRepository;
 import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.data.Personaje;
-import challenge.catalogo_peliculas.dto.PersonajeDto;
+import challenge.catalogo_peliculas.dto.PersonajeCrearDto;
+import challenge.catalogo_peliculas.dto.PersonajeEditarDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +34,8 @@ public class PersonajeServiceImpl implements PersonajeService{
 
     @Override
     public List<Personaje> mostrarPeliculasPorId(Long id) {
-        return personajeRepository.getAllPeliculasById(id);
+        Pelicula pelicula = peliculaRepository.findById(id).get();
+        return pelicula.getPersonajes();
     }
 
     @Override
@@ -53,16 +54,20 @@ public class PersonajeServiceImpl implements PersonajeService{
     }
 
     @Override
-    public Personaje newPersonaje(PersonajeDto personaje) {
+    public Personaje newPersonaje(PersonajeCrearDto personaje) {
         Personaje nuevoPersonaje = new PersonajeBuilder().withPersonajeDto(personaje).build();
         return personajeRepository.save(nuevoPersonaje);
     }
 
     @Override
-    public Personaje replacePersonaje(Long id, PersonajeDto newPersonaje) {
+    public Personaje replacePersonaje(Long id, PersonajeEditarDto newPersonaje) {
         Personaje nuevoPersonaje = personajeRepository.findById(id).get();
         nuevoPersonaje = new PersonajeBuilder().withPersonajeDto(newPersonaje).edit(nuevoPersonaje);
-        nuevoPersonaje.setPeli(peliculaRepository.findById(newPersonaje.getIdPelicula()).get());
+        Pelicula pelicula = peliculaRepository.findById(newPersonaje.getIdPelicula()).get();
+        nuevoPersonaje.setPeli(pelicula);
+        //al asignarle una pelicula al personaje enlaza tambien la pelicula con el personaje
+        pelicula.setPersonaje(nuevoPersonaje);
+        peliculaRepository.save(pelicula);
         return personajeRepository.save(nuevoPersonaje);
     }
 
