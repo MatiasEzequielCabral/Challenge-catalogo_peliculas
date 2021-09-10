@@ -9,6 +9,7 @@ import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.data.Personaje;
 import challenge.catalogo_peliculas.dto.PeliculaCrearDto;
 import challenge.catalogo_peliculas.dto.PeliculaEditarDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +18,11 @@ import java.util.List;
 
 @Service
 public class PeliculaServiceImpl implements PeliculaService{
-
+    @Autowired
     private PeliculaRepository peliculaRepository;
+    @Autowired
     private PersonajeRepository personajeRepository;
+    @Autowired
     private GeneroRepository generoRepository;
 
     public PeliculaServiceImpl(PeliculaRepository peliculaRepository, PersonajeRepository personajeRepository, GeneroRepository generoRepository) {

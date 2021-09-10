@@ -6,6 +6,7 @@ import challenge.catalogo_peliculas.dao.PeliculaRepository;
 import challenge.catalogo_peliculas.data.Genero;
 import challenge.catalogo_peliculas.dto.GeneroCrearDto;
 import challenge.catalogo_peliculas.dto.GeneroEditarDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +15,10 @@ import java.util.List;
 @Service
 public class GeneroServiceImpl implements GeneroService{
 
+    @Autowired
     private GeneroRepository generoRepository;
 
+    @Autowired
     private PeliculaRepository peliculaRepository;
 
     public GeneroServiceImpl(GeneroRepository generoRepository, PeliculaRepository peliculaRepository) {
