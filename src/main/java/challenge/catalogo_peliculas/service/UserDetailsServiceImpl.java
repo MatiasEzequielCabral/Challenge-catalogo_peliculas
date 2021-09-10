@@ -1,6 +1,5 @@
 package challenge.catalogo_peliculas.service;
 
-import challenge.catalogo_peliculas.builder.UsuarioBuilder;
 import challenge.catalogo_peliculas.dao.UsuarioRepository;
 import challenge.catalogo_peliculas.data.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
