@@ -1,9 +1,9 @@
 package challenge.catalogo_peliculas.Controller;
 
 import challenge.catalogo_peliculas.data.AuthenticationRequest;
+import challenge.catalogo_peliculas.data.AuthenticationResponse;
 import challenge.catalogo_peliculas.data.Usuario;
 import challenge.catalogo_peliculas.dto.UsuarioDto;
-import challenge.catalogo_peliculas.service.UserDetailsService;
 import challenge.catalogo_peliculas.service.UserDetailsServiceImpl;
 import challenge.catalogo_peliculas.service.UsuarioService;
 import challenge.catalogo_peliculas.util.JwtUtil;
@@ -44,7 +44,7 @@ public class AuthenticationController {
         }
         UserDetails usuario = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         String jwt = jwtUtil.generateToken(usuario);
-        return new ResponseEntity<>(jwt, HttpStatus.ACCEPTED); //revisar error aqui
+        return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.ACCEPTED);
 
     }
 
