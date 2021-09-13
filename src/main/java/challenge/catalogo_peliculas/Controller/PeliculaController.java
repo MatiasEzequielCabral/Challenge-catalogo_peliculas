@@ -23,45 +23,77 @@ public class PeliculaController{
 
     @GetMapping
     public ResponseEntity<?> mostrarPeliculas(){
-        return new ResponseEntity<>(peliculaService.mostrarTodasPeliculas(), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(peliculaService.mostrarTodasPeliculas(), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("titulo/{titulo}")
     public ResponseEntity<?> mostrarPeliculasPorTitulo(@PathVariable String titulo){
-        return new ResponseEntity<>(peliculaService.buscarPorTitulo(titulo), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(peliculaService.buscarPorTitulo(titulo), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("genero/{id}")
     public ResponseEntity<?> mostrarPorGenero(@PathVariable Long id){
-        return new ResponseEntity<>(peliculaService.buscarTodasPelisPorGeneroId(id), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(peliculaService.buscarTodasPelisPorGeneroId(id), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("orden/ASC")
     public ResponseEntity<?> mostrarPeliculasPorCreacionAscendente(){
-        return new ResponseEntity<>(peliculaService.buscarPorCreacionAscendente(), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(peliculaService.buscarPorCreacionAscendente(), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("orden/DESC")
     public ResponseEntity<?> mostrarPeliculasPorCreacionDescendiente(){
-        return new ResponseEntity<>(peliculaService.buscarPorCreacionDescendente(), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(peliculaService.buscarPorCreacionDescendente(), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody PeliculaEditarDto peliculaDto){
-        Pelicula pelicula = peliculaService.reemplazarPelicula(id, peliculaDto);
-        return new ResponseEntity<>(pelicula, HttpStatus.OK);
+        try{
+            Pelicula pelicula = peliculaService.reemplazarPelicula(id, peliculaDto);
+            return new ResponseEntity<>(pelicula, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
     public ResponseEntity<?> guardarPelicula(@RequestBody PeliculaCrearDto peliculaDto){
-        Pelicula pelicula = peliculaService.nuevaPelicula(peliculaDto);
-        return new ResponseEntity<>(pelicula, HttpStatus.ACCEPTED);
+        try{
+            Pelicula pelicula = peliculaService.nuevaPelicula(peliculaDto);
+            return new ResponseEntity<>(pelicula, HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarPeliculaPorId(@PathVariable Long id){
-        peliculaService.borrarPelicula(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try{
+            peliculaService.borrarPelicula(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

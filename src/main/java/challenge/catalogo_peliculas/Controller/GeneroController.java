@@ -17,27 +17,48 @@ public class GeneroController{
     public GeneroController(GeneroService generoService) {
         this.generoService = generoService;
     }
+    /*try{
 
+    } catch (Exception e){
+
+    }*/
 
     @GetMapping
     public ResponseEntity<?> mostrarGeneros(){
-        return new ResponseEntity<>(generoService.mostrarTodasGenero(), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(generoService.mostrarTodasGenero(), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody GeneroEditarDto generoDto){
-        return new ResponseEntity<>(generoService.reemplazarGenero(id, generoDto), HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(generoService.reemplazarGenero(id, generoDto), HttpStatus.OK);
+
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
     public ResponseEntity<?> guardarGenero(@RequestBody GeneroCrearDto generoDto){
-        Genero genero = generoService.nuevaGenero(generoDto);
-        return new ResponseEntity<>(genero, HttpStatus.ACCEPTED);
+        try{
+            Genero genero = generoService.nuevaGenero(generoDto);
+            return new ResponseEntity<>(genero, HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarGenero(@PathVariable Long id){
-        generoService.borrarGenero(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try{
+            generoService.borrarGenero(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

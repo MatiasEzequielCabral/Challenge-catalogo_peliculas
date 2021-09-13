@@ -33,8 +33,13 @@ public class GeneroServiceImpl implements GeneroService{
 
     @Override
     public Genero nuevaGenero(GeneroCrearDto generoDto) {
-        Genero nuevoGenero = new GeneroBuilder().withGeneroDto(generoDto).build();
-        return generoRepository.save(nuevoGenero);
+
+        try{
+            Genero nuevoGenero = new GeneroBuilder().withGeneroDto(generoDto).build();
+            return generoRepository.save(nuevoGenero);
+        } catch (Exception){
+            throw Exception;
+        }
     }
 
     @Override

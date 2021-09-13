@@ -1,5 +1,6 @@
 package challenge.catalogo_peliculas.Controller;
 
+import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.data.Personaje;
 import challenge.catalogo_peliculas.dto.PersonajeCrearDto;
 import challenge.catalogo_peliculas.dto.PersonajeEditarDto;
@@ -21,48 +22,84 @@ public class PersonajeController {
 
     @GetMapping("/personajes")
     public ResponseEntity<?> mostrarPersonajes(){
-        return new ResponseEntity<>(personajeService.showAll(), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(personajeService.showAll(), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping
     public ResponseEntity<?> mostrarPorNombresEImagenes(){
-        return new ResponseEntity<>(personajeService.showNombresAndImagen(), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(personajeService.showNombresAndImagen(), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("movies/{id}")
     public ResponseEntity<?> mostrarPelisPorId(@PathVariable Long id){
-        return new ResponseEntity<>(personajeService.mostrarPeliculasPorId(id), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(personajeService.mostrarPeliculasPorId(id), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<?> mostrarPorNombre(@PathVariable String nombre){
-        return new ResponseEntity<>(personajeService.buscarPorNombre(nombre), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(personajeService.buscarPorNombre(nombre), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/edad/{edad}")
     public ResponseEntity<?> mostrarPorEdad(@PathVariable int edad){
-        return new ResponseEntity<>(personajeService.buscarPorEdad(edad), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(personajeService.buscarPorEdad(edad), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/peso/{peso}")
     public ResponseEntity<?> mostrarPorPeso(@PathVariable int peso){
-        return new ResponseEntity<>(personajeService.buscarPorPeso(peso), HttpStatus.ACCEPTED);
+        try{
+            return new ResponseEntity<>(personajeService.buscarPorPeso(peso), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizarPersonaje(@PathVariable Long id, @RequestBody PersonajeEditarDto personajeDto){
-        return new ResponseEntity<>(personajeService.replacePersonaje(id, personajeDto), HttpStatus.OK);
+        try{
+            return new ResponseEntity<>(personajeService.replacePersonaje(id, personajeDto), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
     public ResponseEntity<?> guardarPersonaje(@RequestBody PersonajeCrearDto personaje){
-        Personaje nuevoPersonaje = personajeService.newPersonaje(personaje);
-        return new ResponseEntity<>(nuevoPersonaje, HttpStatus.ACCEPTED);
+        try{
+            Personaje nuevoPersonaje = personajeService.newPersonaje(personaje);
+            return new ResponseEntity<>(nuevoPersonaje, HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> borrarPersonaje(@PathVariable Long id){
-        personajeService.deletePersonaje(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try{
+            personajeService.deletePersonaje(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -2,6 +2,7 @@ package challenge.catalogo_peliculas.Controller;
 
 import challenge.catalogo_peliculas.data.AuthenticationRequest;
 import challenge.catalogo_peliculas.data.AuthenticationResponse;
+import challenge.catalogo_peliculas.data.Personaje;
 import challenge.catalogo_peliculas.data.Usuario;
 import challenge.catalogo_peliculas.dto.UsuarioDto;
 import challenge.catalogo_peliculas.service.UserDetailsServiceImpl;
@@ -42,15 +43,22 @@ public class AuthenticationController {
         } catch (BadCredentialsException e) {
             throw new Exception("Incorrect username or password", e);
         }
-        UserDetails usuario = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        String jwt = jwtUtil.generateToken(usuario);
-        return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.ACCEPTED);
-
+        try{
+            UserDetails usuario = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+            String jwt = jwtUtil.generateToken(usuario);
+            return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> createAccount(@RequestBody UsuarioDto usuarioDto){
-        Usuario usuario = usuarioService.save(usuarioDto);
-        return new ResponseEntity<>(usuario, HttpStatus.ACCEPTED);
+        try{
+            Usuario usuario = usuarioService.save(usuarioDto);
+            return new ResponseEntity<>(usuario, HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

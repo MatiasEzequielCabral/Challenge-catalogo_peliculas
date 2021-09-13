@@ -54,7 +54,7 @@ public class PeliculaServiceImpl implements PeliculaService{
     @Override
     public List<Pelicula> buscarTodasPelisPorGeneroId(Long id) {
         Genero genero = generoRepository.findById(id).get();
-        return genero.getPeliculas();
+        return genero.getPeliculas(); //parametro querry
     }
 
     @Override
