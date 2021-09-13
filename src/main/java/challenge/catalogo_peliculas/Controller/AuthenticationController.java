@@ -48,7 +48,7 @@ public class AuthenticationController {
             String jwt = jwtUtil.generateToken(usuario);
             return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.ACCEPTED);
         } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 

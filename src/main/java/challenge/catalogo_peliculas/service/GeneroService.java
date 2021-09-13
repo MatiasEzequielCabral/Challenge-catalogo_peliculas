@@ -3,6 +3,7 @@ package challenge.catalogo_peliculas.service;
 import challenge.catalogo_peliculas.data.Genero;
 import challenge.catalogo_peliculas.dto.GeneroCrearDto;
 import challenge.catalogo_peliculas.dto.GeneroEditarDto;
+import challenge.catalogo_peliculas.excepciones.BussinesException;
 
 import java.util.List;
 

@@ -17,11 +17,6 @@ public class GeneroController{
     public GeneroController(GeneroService generoService) {
         this.generoService = generoService;
     }
-    /*try{
-
-    } catch (Exception e){
-
-    }*/
 
     @GetMapping
     public ResponseEntity<?> mostrarGeneros(){

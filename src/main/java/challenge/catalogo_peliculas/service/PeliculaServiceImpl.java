@@ -1,5 +1,6 @@
 package challenge.catalogo_peliculas.service;
 
+import challenge.catalogo_peliculas.builder.GeneroBuilder;
 import challenge.catalogo_peliculas.builder.PeliculaBuilder;
 import challenge.catalogo_peliculas.dao.GeneroRepository;
 import challenge.catalogo_peliculas.dao.PeliculaRepository;
@@ -9,6 +10,8 @@ import challenge.catalogo_peliculas.data.Pelicula;
 import challenge.catalogo_peliculas.data.Personaje;
 import challenge.catalogo_peliculas.dto.PeliculaCrearDto;
 import challenge.catalogo_peliculas.dto.PeliculaEditarDto;
+import challenge.catalogo_peliculas.excepciones.BussinesException;
+import challenge.catalogo_peliculas.excepciones.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,50 +36,82 @@ public class PeliculaServiceImpl implements PeliculaService{
 
     @Override
     public List<Pelicula> mostrarTodasPeliculas() {
-        return peliculaRepository.findAll();
+        try{
+            return peliculaRepository.findAll();
+        } catch (Exception e){
+            throw new BussinesException("Error al mostrar la entidad");
+        }
     }
 
     @Override
     public Pelicula buscarPorTitulo(@PathVariable String titulo) {
-        return peliculaRepository.findByTitulo(titulo);
+        try{
+            return peliculaRepository.findByTitulo(titulo);
+        } catch (Exception e){
+            throw new ResourceNotFoundException("no se encontro la entidad");
+        }
     }
 
     @Override
     public List<Pelicula> buscarPorCreacionAscendente() {
-        return peliculaRepository.findAllByOrderByFechaCreacionAsc();
+        try{
+            return peliculaRepository.findAllByOrderByFechaCreacionAsc();
+        } catch (Exception e){
+            throw new BussinesException("Error al mostrar la entidad");
+        }
     }
 
     @Override
     public List<Pelicula> buscarPorCreacionDescendente() {
-        return peliculaRepository.findAllByOrderByFechaCreacionDesc();
+        try{
+            return peliculaRepository.findAllByOrderByFechaCreacionDesc();
+        } catch (Exception e){
+            throw new BussinesException("Error al mostrar la entidad");
+        }
     }
 
     @Override
     public List<Pelicula> buscarTodasPelisPorGeneroId(Long id) {
-        Genero genero = generoRepository.findById(id).get();
-        return genero.getPeliculas(); //parametro querry
+        try{
+            Genero genero = generoRepository.findById(id).get();
+            return genero.getPeliculas(); //parametro querry
+        } catch (Exception e){
+            throw new ResourceNotFoundException("no se encontro el id de la entidad");
+        }
     }
 
     @Override
     public Pelicula nuevaPelicula(@RequestBody PeliculaCrearDto pelicula) {
-        Pelicula nuevaPelicula = new PeliculaBuilder().withPeliculaDto(pelicula).build();
-        return peliculaRepository.save(nuevaPelicula);
+        try{
+            Pelicula nuevaPelicula = new PeliculaBuilder().withPeliculaDto(pelicula).build();
+            return peliculaRepository.save(nuevaPelicula);
+        } catch (Exception e){
+            throw new BussinesException("imposible generar nueva entidad");
+        }
     }
 
     @Override
     public Pelicula reemplazarPelicula(Long id, PeliculaEditarDto pelicula) {
-        Pelicula nuevaPelicula = peliculaRepository.findById(id).get();
-        nuevaPelicula = new PeliculaBuilder().withPeliculaDto(pelicula).edit(nuevaPelicula);
-        Personaje personaje = personajeRepository.findById(pelicula.getIdPersonaje()).get();
-        nuevaPelicula.setPersonaje(personaje);
-        //al asignarle un personaje a la pelicula enlaza tambien el personaje a la pelicula que le corresponde
-        personaje.setPeli(nuevaPelicula);
-        personajeRepository.save(personaje);
-        return peliculaRepository.save(nuevaPelicula);
+        try{
+            Pelicula nuevaPelicula = peliculaRepository.findById(id).get();
+            nuevaPelicula = new PeliculaBuilder().withPeliculaDto(pelicula).edit(nuevaPelicula);
+            Personaje personaje = personajeRepository.findById(pelicula.getIdPersonaje()).get();
+            nuevaPelicula.setPersonaje(personaje);
+            //al asignarle un personaje a la pelicula enlaza tambien el personaje a la pelicula que le corresponde
+            personaje.setPeli(nuevaPelicula);
+            personajeRepository.save(personaje);
+            return peliculaRepository.save(nuevaPelicula);
+        } catch (Exception e){
+            throw new ResourceNotFoundException("no se encontro el id de la entidad");
+        }
     }
 
     @Override
     public void borrarPelicula(@PathVariable Long id) {
-        peliculaRepository.deleteById(id);
+        try{
+            peliculaRepository.deleteById(id);
+        } catch (Exception e){
+            throw new ResourceNotFoundException("no se encontro el id de la entidad");
+        }
     }
 }
