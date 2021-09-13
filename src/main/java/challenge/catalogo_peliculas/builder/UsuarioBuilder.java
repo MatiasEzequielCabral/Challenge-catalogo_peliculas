@@ -1,8 +1,6 @@
 package challenge.catalogo_peliculas.builder;
 
-import challenge.catalogo_peliculas.data.Personaje;
 import challenge.catalogo_peliculas.data.Usuario;
-import challenge.catalogo_peliculas.dto.PersonajeCrearDto;
 import challenge.catalogo_peliculas.dto.UsuarioDto;
 
 public class UsuarioBuilder {
