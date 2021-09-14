@@ -98,11 +98,13 @@ public class PersonajeServiceImpl implements PersonajeService{
         try{
             Personaje nuevoPersonaje = personajeRepository.findById(id).get();
             nuevoPersonaje = new PersonajeBuilder().withPersonajeDto(newPersonaje).edit(nuevoPersonaje);
-            Pelicula pelicula = peliculaRepository.findById(newPersonaje.getIdPelicula()).get();
-            nuevoPersonaje.setPeli(pelicula);
-            //al asignarle una pelicula al personaje enlaza tambien la pelicula con el personaje
-            pelicula.setPersonaje(nuevoPersonaje);
-            peliculaRepository.save(pelicula);
+            if(newPersonaje.getIdPelicula() != null){
+                Pelicula pelicula = peliculaRepository.findById(newPersonaje.getIdPelicula()).get();
+                nuevoPersonaje.setPeli(pelicula);
+                //al asignarle una pelicula al personaje enlaza tambien la pelicula con el personaje
+                pelicula.setPersonaje(nuevoPersonaje);
+                peliculaRepository.save(pelicula);
+            }
             return personajeRepository.save(nuevoPersonaje);
         } catch (Exception e){
             throw new ResourceNotFoundException("no se encontro el id de la entidad");
