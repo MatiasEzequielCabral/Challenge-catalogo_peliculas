@@ -14,7 +14,12 @@ public class Pelicula {
     private String titulo;
     private Date fechaCreacion;
     private int calificacion;
-    @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST}, fetch=FetchType.LAZY)
+    //{CascadeType.PERSIST, CascadeType.REMOVE}
+    //CascadeType.ALL
     @JsonBackReference
     private List<Personaje> personajes;
 

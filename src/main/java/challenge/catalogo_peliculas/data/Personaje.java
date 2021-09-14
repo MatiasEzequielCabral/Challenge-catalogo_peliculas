@@ -15,7 +15,10 @@ public class Personaje{
     private int edad;
     private int peso;
     private String historia;
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch=FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST}, fetch=FetchType.LAZY)
     @JsonManagedReference
     private List<Pelicula> peliculas;
 
