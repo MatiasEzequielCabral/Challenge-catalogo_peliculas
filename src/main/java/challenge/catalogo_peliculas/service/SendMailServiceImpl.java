@@ -13,6 +13,7 @@ public class SendMailServiceImpl implements SendMailService{
 
     public void sendEmail(Usuario usuario){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(usuario.getMail());
         mailMessage.setSubject("Bienvenido");
         mailMessage.setText("Su cuenta a sido creada con exito");
         mailSender.send(mailMessage);
