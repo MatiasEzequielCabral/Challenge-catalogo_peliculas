@@ -31,7 +31,11 @@ public class PeliculaBuilder {
     public Pelicula edit(Pelicula pelicula){
         pelicula.setImagen(this.imagen);
         pelicula.setTitulo(this.titulo);
-        pelicula.setCalificacion(this.calificacion);
+        if(calificacion < 1 || calificacion > 5){
+            throw new IllegalArgumentException("La nota tiene que ser de 1 a 5");
+        } else {
+            pelicula.setCalificacion(this.calificacion);
+        }
         return pelicula;
     }
 }
