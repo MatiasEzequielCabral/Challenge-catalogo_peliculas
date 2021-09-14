@@ -24,7 +24,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
     public Usuario save(UsuarioDto usuarioDto){
         Usuario usuario = new UsuarioBuilder().withUsuarioDto(usuarioDto).build();
         usuario = usuarioRepository.save(usuario);
-        //sendMailService.sendEmail(usuario);
+        sendMailService.sendEmail(usuario);
         return usuario;
     }
 }
