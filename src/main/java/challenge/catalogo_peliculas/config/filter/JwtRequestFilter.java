@@ -1,4 +1,4 @@
-package challenge.catalogo_peliculas.filter;
+package challenge.catalogo_peliculas.config.filter;
 
 import challenge.catalogo_peliculas.service.UserDetailsServiceImpl;
 import challenge.catalogo_peliculas.util.JwtUtil;
@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.http.HttpHeaders;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
