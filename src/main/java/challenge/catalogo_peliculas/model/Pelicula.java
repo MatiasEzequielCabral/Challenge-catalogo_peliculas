@@ -3,6 +3,8 @@ package challenge.catalogo_peliculas.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +15,8 @@ public class Pelicula {
     private String imagen;
     private String titulo;
     private Date fechaCreacion;
+    @Min(1)
+    @Max(5)
     private int calificacion;
     @ManyToMany(fetch = FetchType.LAZY,
             cascade =
@@ -47,9 +51,6 @@ public class Pelicula {
         this.imagen = imagen;
         this.titulo = titulo;
         this.calificacion = calificacion;
-        if(calificacion < 1 || calificacion > 5){
-            throw new IllegalArgumentException("La nota tiene que ser de 1 a 5");
-        }
         this.fechaCreacion = new Date();
         this.personajes = new ArrayList<>();
     }
