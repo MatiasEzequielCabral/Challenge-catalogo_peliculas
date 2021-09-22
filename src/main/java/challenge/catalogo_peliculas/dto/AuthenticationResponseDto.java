@@ -1,10 +1,10 @@
 package challenge.catalogo_peliculas.dto;
 
-public class AuthenticationResponse {
+public class AuthenticationResponseDto {
 
     private String token;
 
-    public AuthenticationResponse(String token) {
+    public AuthenticationResponseDto(String token) {
         this.token = token;
     }
 

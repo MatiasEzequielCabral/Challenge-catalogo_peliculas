@@ -1,16 +1,16 @@
 package challenge.catalogo_peliculas.dto;
 
-public class AuthenticationRequest {
+public class AuthenticationRequestDto {
 
     private String username;
     private String password;
 
-    public AuthenticationRequest(String username, String password) {
+    public AuthenticationRequestDto(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public AuthenticationRequest() {
+    public AuthenticationRequestDto() {
     }
 
     public String getUsername() {

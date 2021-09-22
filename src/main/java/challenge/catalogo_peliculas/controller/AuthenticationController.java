@@ -1,7 +1,7 @@
 package challenge.catalogo_peliculas.controller;
 
-import challenge.catalogo_peliculas.dto.AuthenticationRequest;
-import challenge.catalogo_peliculas.dto.AuthenticationResponse;
+import challenge.catalogo_peliculas.dto.AuthenticationRequestDto;
+import challenge.catalogo_peliculas.dto.AuthenticationResponseDto;
 import challenge.catalogo_peliculas.model.Usuario;
 import challenge.catalogo_peliculas.dto.UsuarioDto;
 import challenge.catalogo_peliculas.service.UserDetailsServiceImpl;
@@ -36,7 +36,7 @@ public class AuthenticationController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/authentication")
-    public ResponseEntity<?> createAuthentication(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
+    public ResponseEntity<?> createAuthentication(@RequestBody AuthenticationRequestDto authenticationRequest) throws Exception{
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
         } catch (BadCredentialsException e) {
@@ -45,7 +45,7 @@ public class AuthenticationController {
         try{
             UserDetails usuario = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
             String jwt = jwtUtil.generateToken(usuario);
-            return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(new AuthenticationResponseDto(jwt), HttpStatus.ACCEPTED);
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
