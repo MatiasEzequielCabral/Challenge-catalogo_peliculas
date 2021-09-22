@@ -1,4 +1,4 @@
-package challenge.catalogo_peliculas.Controller;
+package challenge.catalogo_peliculas.controller;
 
 import challenge.catalogo_peliculas.data.Personaje;
 import challenge.catalogo_peliculas.dto.PersonajeCrearDto;
