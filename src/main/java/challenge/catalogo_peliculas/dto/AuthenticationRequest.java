@@ -1,4 +1,4 @@
-package challenge.catalogo_peliculas.model;
+package challenge.catalogo_peliculas.dto;
 
 public class AuthenticationRequest {
 
