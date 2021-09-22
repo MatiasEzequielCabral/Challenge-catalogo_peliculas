@@ -1,6 +1,6 @@
 package challenge.catalogo_peliculas.service;
 
-import challenge.catalogo_peliculas.data.Usuario;
+import challenge.catalogo_peliculas.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

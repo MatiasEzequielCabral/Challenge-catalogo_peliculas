@@ -1,6 +1,6 @@
 package challenge.catalogo_peliculas.builder;
 
-import challenge.catalogo_peliculas.data.Pelicula;
+import challenge.catalogo_peliculas.model.Pelicula;
 import challenge.catalogo_peliculas.dto.PeliculaCrearDto;
 import challenge.catalogo_peliculas.dto.PeliculaEditarDto;
 

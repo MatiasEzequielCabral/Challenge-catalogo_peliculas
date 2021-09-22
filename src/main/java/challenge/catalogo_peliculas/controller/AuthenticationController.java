@@ -1,8 +1,8 @@
 package challenge.catalogo_peliculas.controller;
 
-import challenge.catalogo_peliculas.data.AuthenticationRequest;
-import challenge.catalogo_peliculas.data.AuthenticationResponse;
-import challenge.catalogo_peliculas.data.Usuario;
+import challenge.catalogo_peliculas.model.AuthenticationRequest;
+import challenge.catalogo_peliculas.model.AuthenticationResponse;
+import challenge.catalogo_peliculas.model.Usuario;
 import challenge.catalogo_peliculas.dto.UsuarioDto;
 import challenge.catalogo_peliculas.service.UserDetailsServiceImpl;
 import challenge.catalogo_peliculas.service.UsuarioService;

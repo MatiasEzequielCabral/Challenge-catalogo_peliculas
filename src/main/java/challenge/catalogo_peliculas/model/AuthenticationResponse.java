@@ -1,4 +1,4 @@
-package challenge.catalogo_peliculas.data;
+package challenge.catalogo_peliculas.model;
 
 public class AuthenticationResponse {
 

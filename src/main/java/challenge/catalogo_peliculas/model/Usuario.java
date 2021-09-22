@@ -1,4 +1,4 @@
-package challenge.catalogo_peliculas.data;
+package challenge.catalogo_peliculas.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

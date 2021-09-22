@@ -1,11 +1,11 @@
 package challenge.catalogo_peliculas;
 
-import challenge.catalogo_peliculas.dao.GeneroRepository;
-import challenge.catalogo_peliculas.dao.PeliculaRepository;
-import challenge.catalogo_peliculas.dao.PersonajeRepository;
-import challenge.catalogo_peliculas.data.Genero;
-import challenge.catalogo_peliculas.data.Pelicula;
-import challenge.catalogo_peliculas.data.Personaje;
+import challenge.catalogo_peliculas.repository.GeneroRepository;
+import challenge.catalogo_peliculas.repository.PeliculaRepository;
+import challenge.catalogo_peliculas.repository.PersonajeRepository;
+import challenge.catalogo_peliculas.model.Genero;
+import challenge.catalogo_peliculas.model.Pelicula;
+import challenge.catalogo_peliculas.model.Personaje;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

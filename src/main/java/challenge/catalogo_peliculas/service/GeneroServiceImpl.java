@@ -1,9 +1,9 @@
 package challenge.catalogo_peliculas.service;
 
 import challenge.catalogo_peliculas.builder.GeneroBuilder;
-import challenge.catalogo_peliculas.dao.GeneroRepository;
-import challenge.catalogo_peliculas.dao.PeliculaRepository;
-import challenge.catalogo_peliculas.data.Genero;
+import challenge.catalogo_peliculas.repository.GeneroRepository;
+import challenge.catalogo_peliculas.repository.PeliculaRepository;
+import challenge.catalogo_peliculas.model.Genero;
 import challenge.catalogo_peliculas.dto.GeneroCrearDto;
 import challenge.catalogo_peliculas.dto.GeneroEditarDto;
 import challenge.catalogo_peliculas.excepciones.BussinesException;

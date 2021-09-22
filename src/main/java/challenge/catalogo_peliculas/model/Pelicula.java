@@ -1,4 +1,4 @@
-package challenge.catalogo_peliculas.data;
+package challenge.catalogo_peliculas.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -14,7 +14,24 @@ public class Pelicula {
     private String titulo;
     private Date fechaCreacion;
     private int calificacion;
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade =
+                    {
+                            CascadeType.DETACH,
+                            CascadeType.MERGE,
+                            CascadeType.REFRESH,
+                            CascadeType.PERSIST
+                    },
+            targetEntity = Personaje.class)
+    @JoinTable(name = "pelicula_personajes",
+            inverseJoinColumns = @JoinColumn(name = "personaje_id",
+                    nullable = false,
+                    updatable = false),
+            joinColumns = @JoinColumn(name = "pelicula_id",
+                    nullable = false,
+                    updatable = false),
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     @JsonBackReference
     private List<Personaje> personajes;
 

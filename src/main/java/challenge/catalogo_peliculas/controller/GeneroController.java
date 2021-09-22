@@ -1,6 +1,6 @@
 package challenge.catalogo_peliculas.controller;
 
-import challenge.catalogo_peliculas.data.Genero;
+import challenge.catalogo_peliculas.model.Genero;
 import challenge.catalogo_peliculas.dto.GeneroCrearDto;
 import challenge.catalogo_peliculas.dto.GeneroEditarDto;
 import challenge.catalogo_peliculas.service.GeneroService;

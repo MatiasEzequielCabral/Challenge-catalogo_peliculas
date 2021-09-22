@@ -1,11 +1,10 @@
 package challenge.catalogo_peliculas.service;
 
-import challenge.catalogo_peliculas.builder.PeliculaBuilder;
 import challenge.catalogo_peliculas.builder.PersonajeBuilder;
-import challenge.catalogo_peliculas.dao.PeliculaRepository;
-import challenge.catalogo_peliculas.dao.PersonajeRepository;
-import challenge.catalogo_peliculas.data.Pelicula;
-import challenge.catalogo_peliculas.data.Personaje;
+import challenge.catalogo_peliculas.repository.PeliculaRepository;
+import challenge.catalogo_peliculas.repository.PersonajeRepository;
+import challenge.catalogo_peliculas.model.Pelicula;
+import challenge.catalogo_peliculas.model.Personaje;
 import challenge.catalogo_peliculas.dto.PersonajeCrearDto;
 import challenge.catalogo_peliculas.dto.PersonajeEditarDto;
 import challenge.catalogo_peliculas.excepciones.BussinesException;

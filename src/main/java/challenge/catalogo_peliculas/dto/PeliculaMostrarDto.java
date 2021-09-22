@@ -1,6 +1,6 @@
 package challenge.catalogo_peliculas.dto;
 
-import challenge.catalogo_peliculas.data.Personaje;
+import challenge.catalogo_peliculas.model.Personaje;
 
 import java.util.List;
 

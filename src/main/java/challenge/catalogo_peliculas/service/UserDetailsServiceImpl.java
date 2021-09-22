@@ -1,7 +1,7 @@
 package challenge.catalogo_peliculas.service;
 
-import challenge.catalogo_peliculas.dao.UsuarioRepository;
-import challenge.catalogo_peliculas.data.Usuario;
+import challenge.catalogo_peliculas.repository.UsuarioRepository;
+import challenge.catalogo_peliculas.model.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

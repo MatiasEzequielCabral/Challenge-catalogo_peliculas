@@ -1,6 +1,6 @@
 package challenge.catalogo_peliculas.service;
 
-import challenge.catalogo_peliculas.data.Personaje;
+import challenge.catalogo_peliculas.model.Personaje;
 import challenge.catalogo_peliculas.dto.PersonajeCrearDto;
 import challenge.catalogo_peliculas.dto.PersonajeEditarDto;
 
