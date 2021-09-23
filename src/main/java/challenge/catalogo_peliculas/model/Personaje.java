@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Personaje{
     private int edad;
     private int peso;
     private String historia;
+    @Null
     @ManyToMany(fetch = FetchType.LAZY,
             cascade =
                     {
@@ -37,4 +39,21 @@ public class Personaje{
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     @JsonManagedReference
     private List<Pelicula> peliculas;
+
+    public Personaje(String url, String nombre, int edad, int peso, String historia) {
+        this.imagen = imagen;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.peso = peso;
+        this.historia = historia;
+        this.peliculas = new ArrayList<>();
+    }
+
+    public Personaje() {
+
+    }
+
+    public void setPeli(Pelicula pelicula){
+        peliculas.add(pelicula);
+    }
 }
