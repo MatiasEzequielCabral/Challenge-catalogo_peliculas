@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Pelicula {
     @Min(1)
     @Max(5)
     private int calificacion;
+    @Null
     @ManyToMany(fetch = FetchType.LAZY,
             cascade =
                     {
@@ -40,4 +42,24 @@ public class Pelicula {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     @JsonBackReference
     private List<Personaje> personajes;
+
+    public Pelicula(String imagen, String titulo, Date fechaCreacion, int calificacion) {
+        this.imagen = imagen;
+        this.titulo = titulo;
+        this.fechaCreacion = fechaCreacion;
+        this.calificacion = calificacion;
+        this.personajes = new ArrayList<>();
+    }
+
+    public Pelicula(String imagen, String titulo, int calificacion) {
+
+    }
+
+    public Pelicula() {
+
+    }
+
+    public void setPersonaje(Personaje personaje){
+        personajes.add(personaje);
+    }
 }
