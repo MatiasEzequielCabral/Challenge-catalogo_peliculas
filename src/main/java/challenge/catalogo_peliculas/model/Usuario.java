@@ -16,4 +16,14 @@ public class Usuario {
     private String mail;
     private String username;
     private String password;
+
+    public Usuario(String mail, String username, String password) {
+        this.mail = mail;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Usuario() {
+
+    }
 }
