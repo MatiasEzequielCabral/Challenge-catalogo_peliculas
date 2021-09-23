@@ -39,19 +39,19 @@ public class LoadDataBase {
             List<Pelicula> lPeliGenero2 = new ArrayList<>();
             List<Pelicula> lPeliGenero3 = new ArrayList<>();
 
-            Personaje p1 = new Personaje("soy urll", "Sara", 15, 70, "hola bb",null);
-            Personaje p2 = new Personaje("urlita", "Felipe", 15, 73, "al final",null);
-            Personaje p3 = new Personaje("soy pepito.rul", "Pepe", 11, 72, "hola",null);
-            Personaje p4 = new Personaje("url del fin del mundo", "Antonio", 53, 90, "hellou",null);
+            Personaje p1 = new Personaje("soy urll", "Sara", 15, 70, "hola bb");
+            Personaje p2 = new Personaje("urlita", "Felipe", 15, 73, "al final");
+            Personaje p3 = new Personaje("soy pepito.rul", "Pepe", 11, 72, "hola");
+            Personaje p4 = new Personaje("url del fin del mundo", "Antonio", 53, 90, "hellou");
 
-            Pelicula peli1 = new Pelicula("soy una imagen", "tomb rider", new Date(), 2, null);
-            Pelicula peli2 = new Pelicula("soy una imagen", "madagascar", new Date(), 5, null);
-            Pelicula peli3 = new Pelicula("soy una imagen", "hitman", new Date(), 3, null);
-            Pelicula peli4 = new Pelicula("soy una imagen", "la bruja", new Date(), 4, null);
+            Pelicula peli1 = new Pelicula("soy una imagen", "tomb rider", new Date(), 2);
+            Pelicula peli2 = new Pelicula("soy una imagen", "madagascar", new Date(), 5);
+            Pelicula peli3 = new Pelicula("soy una imagen", "hitman", new Date(), 3);
+            Pelicula peli4 = new Pelicula("soy una imagen", "la bruja", new Date(), 4);
 
-            Genero gro1 = new Genero("accion", "soy una imagen", null);
-            Genero gro2 = new Genero("terror", "soy una imagen", null);
-            Genero gro3 = new Genero("animacion", "soy una imagen", null);
+            Genero gro1 = new Genero("accion", "soy una imagen");
+            Genero gro2 = new Genero("terror", "soy una imagen");
+            Genero gro3 = new Genero("animacion", "soy una imagen");
 
             lp1.add(p1); lp1.add(p2);
             lp2.add(p3); lp2.add(p4);
