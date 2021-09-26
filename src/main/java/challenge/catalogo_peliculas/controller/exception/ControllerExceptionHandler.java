@@ -1,7 +1,6 @@
 package challenge.catalogo_peliculas.controller.exception;
 
 import challenge.catalogo_peliculas.dto.ErrorMessageDto;
-import challenge.catalogo_peliculas.excepciones.BussinesException;
 import challenge.catalogo_peliculas.excepciones.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
