@@ -1,5 +1,10 @@
 package challenge.catalogo_peliculas.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class PersonajeEditarDto {
 
     private String imagen;
@@ -9,54 +14,4 @@ public class PersonajeEditarDto {
     private String historia;
     private Long idPelicula;
 
-    public PersonajeEditarDto() {
-    }
-
-    public Long getIdPelicula() {
-        return idPelicula;
-    }
-
-    public void setIdPelicula(Long idPelicula) {
-        this.idPelicula = idPelicula;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public int getPeso() {
-        return peso;
-    }
-
-    public void setPeso(int peso) {
-        this.peso = peso;
-    }
-
-    public String getHistoria() {
-        return historia;
-    }
-
-    public void setHistoria(String historia) {
-        this.historia = historia;
-    }
 }

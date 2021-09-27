@@ -1,7 +1,12 @@
 package challenge.catalogo_peliculas.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
 public class ErrorMessageDto {
     private int statusCode;
     private Date timestamp;
@@ -15,15 +20,4 @@ public class ErrorMessageDto {
         this.description = description;
     }
 
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }
