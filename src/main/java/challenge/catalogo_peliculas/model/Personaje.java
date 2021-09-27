@@ -2,6 +2,7 @@ package challenge.catalogo_peliculas.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Null;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Personaje{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,10 +49,6 @@ public class Personaje{
         this.peso = peso;
         this.historia = historia;
         this.peliculas = new ArrayList<>();
-    }
-
-    public Personaje() {
-
     }
 
     public void setPeli(Pelicula pelicula){

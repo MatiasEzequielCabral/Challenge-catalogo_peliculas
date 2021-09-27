@@ -2,6 +2,7 @@ package challenge.catalogo_peliculas.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Pelicula {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String imagen;
@@ -52,10 +54,6 @@ public class Pelicula {
     }
 
     public Pelicula(String imagen, String titulo, int calificacion) {
-
-    }
-
-    public Pelicula() {
 
     }
 
